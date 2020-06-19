@@ -94,7 +94,9 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('loadinforuser1', 'API\testController@loadinforuser1');
     Route::get('autosendmess','API\testController@autoSendMess');
     Route::post('loadMess','API\testController@LoadContentMess');
-
+    Route::post('SendMess', 'API\testController@SendMess');
+    Route::post('loadInforUser_full', 'API\testController@loadInforUser_full');
+    Route::get('loadInforUser_full', 'API\testController@loadInforUser_full');
 });
 
 Route::group(['prefix' => 'pChat'], function () {

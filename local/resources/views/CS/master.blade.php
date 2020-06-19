@@ -453,8 +453,8 @@
     </script>
     @yield('content')
     <script>
-        //var socket = io('http://localhost:3000');
-        var socket=io('https://flrv-ch.herokuapp.com/');
+        var socket = io('http://localhost:3000');
+        //var socket=io('https://nhandz.herokuapp.com/');
         $(document).ready(function() {
             socket.emit('client-send-ID', {
                 IDND: {{session()->get('ID')}},
@@ -588,9 +588,10 @@
                 }
             });
             socket.on('Server-send-messagePP', function(data) {
+                console.log(data)
                // console.log($("imgAvx").attr("src"))
-               $('#chat-messages').scrollTop(9999);
-                if(data.ID==" "+$('#IDC').attr("value")+" "){
+
+                if(data.ID.trim()==""+$('#IDC').attr("value")+""){
                     $add ='<div class="message">'+
                         '<img src="'+$('#imgAv').attr("src")+'" />'+
                         '<div class="bubble">'+
@@ -600,8 +601,9 @@
                     $('#chat-messages').append($add);
                 }
                 else{
-                    showSn("ban co tin nhan moi tu "+data.Name+"....");
+                    showSn("ban co tin nhan moi tu "+data.Name+"...."+data.Content);
                 }
+                $('#chat-messages').scrollTop(9999);
 
 
             })

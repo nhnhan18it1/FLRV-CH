@@ -16,7 +16,7 @@
 
 
     <script>
-        var socket = io('https://flrv-ch.herokuapp.com/');
+        var socket = io('https://nhandz.herokuapp.com/');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

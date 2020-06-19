@@ -82,6 +82,12 @@ class testController extends Controller
         }
     }
 
+    public function loadInforUser_full(Request $request)
+    {
+        $rs=account::where('ID',$request->ID)->get();
+        echo json_encode($rs);
+    }
+
     public function PostImg(Request $request)
     {
         $co = newsmodel::count();
@@ -263,8 +269,24 @@ class testController extends Controller
     }
     public function LoadContentMess(Request $request)
     {
-        $messes=chats::where([['IDsend',$request->ID1],['IDreceive',$request->ID1]])->orWhere([['IDsend',$request->ID2],['IDreceive',$request->ID1]])->get();
+        $messes=chats::where([['IDsend',$request->ID1],['IDreceive',$request->ID2]])->orWhere([['IDsend',$request->ID2],['IDreceive',$request->ID1]])->get();
         //dd($messes);
         echo json_encode($messes);
+    }
+    public function SendMess(Request $request)
+    {
+        //dd($request);
+        if ($request->IDsend!=""&&$request->IDreceive!=""&&$request->Content!="") {
+            $sendm=new chats;
+            $sendm->IDsend=$request->IDsend;
+            $sendm->IDreceive=$request->IDreceive;
+            $sendm->content=$request->Content;
+            $sendm->status=0;
+            $sendm->save();
+            echo "success!";
+        }
+        else{
+            echo "exit";
+        }
     }
 }
